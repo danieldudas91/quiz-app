@@ -1,10 +1,23 @@
 package com.example.quizapp.model
 
-class Question (val questionString: String, val answers: List<Answer>){
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "questions")
+data class Question (
+                     val questionString: String,
+
+                     val answers: List<Answer>)
+{
+    @PrimaryKey(autoGenerate = true)
+    var id: Int? = null
     companion object{
         const val MAX_NUMBER_OF_ANSWERS = 4
     }
 
+
+    @ColumnInfo(name = "is_proper_question")
     var isProperQuestion: Boolean = determineIsProperQuestion()
 
     private fun determineIsProperQuestion(): Boolean{
