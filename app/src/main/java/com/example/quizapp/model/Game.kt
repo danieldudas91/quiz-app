@@ -9,14 +9,14 @@ class Game (private val questions: List<Question>) {
     }
 
     fun getFirstQuestion(): Question{
-        val firstQuestion = try{
-            _questions.first()
+        var currentQuestion = Question("", listOf())
+        try{
+            currentQuestion = _questions.first()
         }
         catch (e: NoSuchElementException){
             e.printStackTrace()
         }
-        currentQuestion = firstQuestion as Question
-        return firstQuestion
+        return currentQuestion
     }
 
     fun getNextQuestion(): Question{
