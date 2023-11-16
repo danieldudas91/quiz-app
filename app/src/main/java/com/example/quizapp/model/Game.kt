@@ -1,27 +1,28 @@
 package com.example.quizapp.model
 
-class Game (private val questions: List<Question>) {
-    private val _questions: MutableList<Question> = getMutableQuestions()
-    private lateinit var  currentQuestion: Question
+class Game (private val questions: List<QuestionWithAnswers>) {
+    private val _questions: MutableList<QuestionWithAnswers> = getMutableQuestions()
+    private lateinit var  currentQuestion: QuestionWithAnswers
 
-    private fun getMutableQuestions(): MutableList<Question> {
-        return questions.filter { it.isProperQuestion }.shuffled().toMutableList()
+    private fun getMutableQuestions(): MutableList<QuestionWithAnswers> {
+        return questions.filter { it.question.isProperQuestion }.shuffled().toMutableList()
     }
 
-    fun getFirstQuestion(): Question{
-        var currentQuestion = Question("", listOf())
+    fun getFirstQuestion(): QuestionWithAnswers{
+        var firstQuestion = QuestionWithAnswers(Question(""), listOf())
         try{
-            currentQuestion = _questions.first()
+            firstQuestion = _questions.first()
         }
         catch (e: NoSuchElementException){
             e.printStackTrace()
         }
-        return currentQuestion
+        currentQuestion = firstQuestion
+        return firstQuestion
     }
 
-    fun getNextQuestion(): Question{
+    fun getNextQuestion(): QuestionWithAnswers{
         _questions.remove(currentQuestion)
-        var nextQuestion = Question("", listOf())
+        var nextQuestion = QuestionWithAnswers(Question(""), listOf())
         try{
             nextQuestion = _questions.first()
         }
