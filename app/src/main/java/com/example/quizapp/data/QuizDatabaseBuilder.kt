@@ -19,6 +19,8 @@ object QuizDatabaseBuilder {
             QuizDatabase::class.java,
             "quiz-database"
             )
+            .fallbackToDestructiveMigration()
+            .createFromAsset("quiz.db")
             .build()
     }
 }
