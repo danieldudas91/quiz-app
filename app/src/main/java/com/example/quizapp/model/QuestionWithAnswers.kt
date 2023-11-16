@@ -7,7 +7,7 @@ data class QuestionWithAnswers(
     @Embedded val question: Question,
     @Relation(
         parentColumn = "question_id",
-        entityColumn = "answer_id"
+        entityColumn = "question_id"
     )
     val answers: List<Answer>
 )
