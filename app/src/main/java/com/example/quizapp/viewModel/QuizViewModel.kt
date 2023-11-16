@@ -5,31 +5,25 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.quizapp.data.Repository
 import com.example.quizapp.model.Question
+import com.example.quizapp.model.QuestionWithAnswers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class QuizViewModel(context: Context) : ViewModel() {
     private val repository = Repository(context)
-    val questions = getAllQuestions()
 
-    private fun getAllQuestions(): List<Question>{
-        var questions = listOf<Question>()
-        viewModelScope.launch {
-            try{
-                questions = repository.getAllQuestions()
-            }
-            catch(e: Exception){
-                e.printStackTrace()
-            }
-        }
-        return questions
+     fun getAllQuestionsWithAnswers(): List<QuestionWithAnswers>? {
+         var questionsData: List<QuestionWithAnswers>?
+         runBlocking {
+             questionsData = repository.getAllQuestionsWithAnswers()
+         }
+        return questionsData
     }
-
-    fun addQuestion(question: Question){
+    fun addQuestionWithAnswers(question: Question) {
         viewModelScope.launch {
-            try{
-                repository.addQuestion(question)
-            }
-            catch(e: Exception){
+            try {
+                repository.addQuestionWithAnswers(question)
+            } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
