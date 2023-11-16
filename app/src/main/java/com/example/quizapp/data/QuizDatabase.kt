@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 import com.example.quizapp.model.Answer
 import com.example.quizapp.model.Question
 
-@Database(entities = [Question::class, Answer::class], version = 1)
+@Database(entities = [Question::class, Answer::class], version = 2)
 abstract class QuizDatabase: RoomDatabase() {
     abstract fun quizDao(): QuizDao
 }
