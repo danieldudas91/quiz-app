@@ -1,6 +1,6 @@
 package com.example.quizapp.model
 
-class Game (private val questions: List<QuestionWithAnswers>) {
+class Game(private val questions: List<QuestionWithAnswers>) {
     private val _questions: MutableList<QuestionWithAnswers> = getMutableQuestions()
     private lateinit var currentQuestion: QuestionWithAnswers
     private var answeredQuestions = 1
@@ -9,30 +9,32 @@ class Game (private val questions: List<QuestionWithAnswers>) {
         return questions.filter { it.question.isProperQuestion }.shuffled().toMutableList()
     }
 
-    fun getFirstQuestion(): QuestionWithAnswers{
+    fun getFirstQuestion(): QuestionWithAnswers {
         var firstQuestion = QuestionWithAnswers(Question(""), listOf())
-        try{
+        try {
             firstQuestion = _questions.first()
-        }
-        catch (e: NoSuchElementException){
+        } catch (e: NoSuchElementException) {
             e.printStackTrace()
         }
         currentQuestion = firstQuestion
         return firstQuestion
     }
 
-    fun getNextQuestion(): QuestionWithAnswers{
+    fun getNextQuestion(): QuestionWithAnswers {
         _questions.remove(currentQuestion)
         var nextQuestion = QuestionWithAnswers(Question(""), listOf())
-        try{
+        try {
             nextQuestion = _questions.first()
-        }
-        catch(e: NoSuchElementException){
+        } catch (e: NoSuchElementException) {
             e.printStackTrace()
         }
         currentQuestion = nextQuestion
         answeredQuestions++
         return nextQuestion
+    }
+
+    fun isAllAnswered(): Boolean {
+        return answeredQuestions == questions.size
     }
 
 }
