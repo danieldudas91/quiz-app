@@ -87,7 +87,12 @@ class MainActivity : ComponentActivity() {
             style = TextStyle(fontSize = 24.sp),
             onClick = {
             if (answer.isTrueAnswer) {
-                currentQuestionState.value = game.getNextQuestion()
+                if (game.isAllAnswered()){
+                    Toast.makeText(context, "You're winner", Toast.LENGTH_LONG).show()
+                }
+                else{
+                    currentQuestionState.value = game.getNextQuestion()
+                }
             } else {
                 Toast.makeText(context, "Not true", Toast.LENGTH_LONG).show()
             }
