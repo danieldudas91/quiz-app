@@ -2,7 +2,8 @@ package com.example.quizapp.model
 
 class Game (private val questions: List<QuestionWithAnswers>) {
     private val _questions: MutableList<QuestionWithAnswers> = getMutableQuestions()
-    private lateinit var  currentQuestion: QuestionWithAnswers
+    private lateinit var currentQuestion: QuestionWithAnswers
+    private var answeredQuestions = 1
 
     private fun getMutableQuestions(): MutableList<QuestionWithAnswers> {
         return questions.filter { it.question.isProperQuestion }.shuffled().toMutableList()
@@ -30,7 +31,8 @@ class Game (private val questions: List<QuestionWithAnswers>) {
             e.printStackTrace()
         }
         currentQuestion = nextQuestion
-        return  nextQuestion
+        answeredQuestions++
+        return nextQuestion
     }
 
 }
